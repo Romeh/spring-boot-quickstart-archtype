@@ -55,3 +55,7 @@ Test on the browser via SWAGGER
 ```sh
 http://localhost:8080/swagger-ui.html
 ```
+
+Sample app generared from that archtype can be found here :
+-------------------
+https://github.com/Romeh/spring-boot-sample-app
