@@ -14,8 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ExternalServiceWithSpringRetryAndCircuitBreaker {
     private static final Logger log = LoggerFactory.getLogger(ExternalServiceWithSpringRetryAndCircuitBreaker.class);
 
-     and for example exclude Timeout exception from retry conditions and go to recover directly
-    */
+    /* example of circuit breaker with spring retry which will retry to call the server 2 times in case of error
+      and for example exclude Timeout exception from retry conditions and go to recover directly
+     */
     @CircuitBreaker(maxAttempts = 2, openTimeout = 5000l, resetTimeout = 10000l, exclude = TimeoutException.class)
     public void sendEmail() {
         // add your external service call here so it can be protected by Spring rety and CircuitBreaker logic
