@@ -34,6 +34,7 @@ public class ApplicationSanityCheck_ITT {
 
     }
 
+    // and retry in case of failure 3 times with 20 seconds delay between each try
     @Test
     @Retry(times = 3, timeout = 20000)
     public void test_is_server_up() {

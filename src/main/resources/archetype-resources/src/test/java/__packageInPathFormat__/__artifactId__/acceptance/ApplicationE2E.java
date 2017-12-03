@@ -31,7 +31,6 @@ public class ApplicationE2E{
 
     }
     // example of true end to end call which call UAT real endpoint
-    // and retry in case of failure 3 times with 20 seconds delay between each try
     @Test
     public void test_is_server_up() {
         assertTrue(restTemplate.getForEntity(baseURL + "/health", String.class).getStatusCode().is2xxSuccessful());
