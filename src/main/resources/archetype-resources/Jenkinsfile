@@ -22,8 +22,10 @@ pipeline {
                         print targetVersion
                         sh "'${mvnHome}/bin/mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
                         def pom = readMavenPom file: 'pom.xml'
+                        // get the current development version
                         developmentArtifactVersion = "${pom.version}-${targetVersion}"
                         print pom.version
+                        // execute the unit testing and collect the reports
                         junit '**//*target/surefire-reports/TEST-*.xml'
                         archive 'target*//*.jar'
                     } else {
@@ -38,27 +40,29 @@ pipeline {
             }
         }
         stage('Integration tests') {
-            // Run the maven build
+            // Run integration test
             steps {
                 script {
                     def mvnHome = tool 'Maven 3.3.9'
                     if (isUnix()) {
+                        // just to trigger the integration test without unit testing
                         sh "'${mvnHome}/bin/mvn'  verify -Dunit-tests.skip=true"
                     } else {
                         bat(/"${mvnHome}\bin\mvn" verify -Dunit-tests.skip=true/)
                     }
 
                 }
+                // cucumber reports collection
                 cucumber buildStatus: null, fileIncludePattern: '**/cucumber.json', jsonReportDirectory: 'target', sortingMethod: 'ALPHABETICAL'
             }
         }
         stage('Sonar scan execution') {
-            // Run the maven build
+            // Run the sonar scan
             steps {
                 script {
                     def mvnHome = tool 'Maven 3.3.9'
                     withSonarQubeEnv {
-                        // sh "'${mvnHome}/bin/mvn'  verify sonar:sonar -Dsonar.host.url=http://sonarserverURl.bc/sonar/ -Dmaven.test.failure.ignore=true"
+
                         sh "'${mvnHome}/bin/mvn'  verify sonar:sonar -Dintegration-tests.skip=true -Dmaven.test.failure.ignore=true"
                     }
                 }
@@ -91,9 +95,10 @@ pipeline {
                         timeout(time: 2, unit: 'MINUTES') {
                             //
                             if (developmentArtifactVersion != null && !developmentArtifactVersion.isEmpty()) {
-                                def jarName = "alert-manager-${developmentArtifactVersion}.jar"
+                                // replace it with your application name or make it easily loaded from pom.xml
+                                def jarName = "application-${developmentArtifactVersion}.jar"
                                 echo "the application is deploying ${jarName}"
-                                // NOTE : CREATE your deployemnt JOB, check build job: 'AlertManagerToITT' in jenkins for reference
+                                // NOTE : CREATE your deployemnt JOB, where it can take parameters whoch is the jar name to fetch from jenkins workspace
                                 build job: 'ApplicationToITT', parameters: [[$class: 'StringParameterValue', name: 'jarName', value: jarName]]
                                 echo 'the application is deployed !'
                             } else {
@@ -139,7 +144,7 @@ pipeline {
                             echo "Building version ${v} - so released version is ${releasedVersion}"
                         }
                         // jenkins user credentials ID which is transparent to the user and password change
-                        sshagent(['ba6d200d-3b5a-454e-a8e6-c6b6114d3603']) {
+                        sshagent(['0000000-3b5a-454e-a8e6-c6b6114d36000']) {
                             sh "git tag -f v${v}"
                             sh "git push -f --tags"
                         }
@@ -165,7 +170,7 @@ pipeline {
                             input message: 'Approve deployment to UAT?'
                         }
                         timeout(time: 3, unit: 'MINUTES') {
-                            //  build job: 'AlertManagerToITT'
+                            //  deployment job which will take the relasesed version
                             if (releasedVersion != null && !releasedVersion.isEmpty()) {
                                 // make the applciation name for the jar configurable
                                 def jarName = "application-${releasedVersion}.jar"
@@ -238,7 +243,7 @@ pipeline {
 }
 def developmentArtifactVersion = ''
 def releasedVersion = ''
-
+// get change log to be send over the mail
 @NonCPS
 def getChangeString() {
     MAX_MSG_LEN = 100
@@ -306,7 +311,6 @@ def getReleaseVersion() {
                                } else {
                                    bat(/"${mvnHome}\bin\mvn" verify -Dunit-tests.skip=true/)
                                }
-
                            }
                        },
                        SonarCheck: {

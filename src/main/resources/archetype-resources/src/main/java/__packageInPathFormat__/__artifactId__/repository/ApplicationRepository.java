@@ -7,7 +7,7 @@ import ${package}.${artifactId}.domain.ApplicationItem;
 import java.util.List;
 
 /**
- * Created by id961900 on 23/08/2017.
+ * Created by MRomeh on 23/08/2017.
  */
 @Repository
 public interface ApplicationRepository extends JpaRepository<ApplicationItem, Long> {

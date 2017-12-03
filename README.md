@@ -44,7 +44,7 @@ $ mvn archetype:generate \
      -DarchetypeArtifactId=spring-boot-quickstart \
      -DarchetypeVersion=1.0.0 \
      -DgroupId=com.test \
-     -DartifactId=springBootSample \
+     -DartifactId=sampleapp \
      -Dversion=1.0.0-SNAPSHOT \
      -DinteractiveMode=false
 ```

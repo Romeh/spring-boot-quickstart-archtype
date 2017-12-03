@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by id961900 on 07/09/2017.
+ * Created by MRomeh.
  */
 public class GetVersionStep extends CucumberRoot {
     private ResponseEntity<String> response; // output

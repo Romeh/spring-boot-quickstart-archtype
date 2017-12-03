@@ -1,7 +1,7 @@
 package ${package}.${artifactId}.retry;
 
 /**
- * Created by id961900 on 05/09/2017.
+ * Created by MRomeh on 05/09/2017.
  */
 
 import java.lang.annotation.ElementType;

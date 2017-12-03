@@ -11,7 +11,7 @@ import ${package}.${artifactId}.Application;
 import java.util.Collections;
 
 /**
- * Created by id961900 on 07/09/2017.
+ * Created by MRomeh.
  */
 
 

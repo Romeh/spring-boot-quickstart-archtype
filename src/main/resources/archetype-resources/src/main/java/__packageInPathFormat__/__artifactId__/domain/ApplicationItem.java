@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Map;
 
 /**
- * Created by id961900 on 09/08/2017.
+ * Created by MRomeh
  */
 @Entity
 @Table(name = "Applications")
