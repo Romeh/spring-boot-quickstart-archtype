@@ -2,6 +2,7 @@
 =========================================
 
 
+![alt text](AppArchtype.jpg)
 Summary
 -------
 The project is a Maven archetype for Spring Boot web application 
