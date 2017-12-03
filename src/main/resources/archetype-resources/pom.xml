@@ -6,6 +6,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.6.RELEASE</version>
+        <relativePath/><!-- lookup parent from repository -->
+    </parent>
 
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
@@ -13,15 +19,8 @@
     <packaging>jar</packaging>
 
     <name>${artifactId}</name>
-    <description>${artifactId} project for Spring Boot batch</description>
+    <description>${artifactId} project for Spring Boot</description>
 
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.6.RELEASE</version>
-        <relativePath/><!-- lookup parent from repository -->
-    </parent>
     <!-- Properties -->
     <properties>
 
@@ -73,37 +72,24 @@
         </dependencies>
     </dependencyManagement>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>http://bicsjava.bc/nexus/repository/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>nexus-releases</id>
-            <url>http://bicsjava.bc/nexus/repository/releases</url>
-        </repository>
-    </distributionManagement>
-
     <!-- Dependencies -->
 
     <dependencies>
         <dependency>
-            <groupId>com.bics</groupId>
-            <artifactId>spring-boot-starter-batch-web</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cache</artifactId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.bics.starters</groupId>
-            <artifactId>alerts-spring-boot-starter</artifactId>
-            <version>RELEASE</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -115,6 +101,11 @@
             <artifactId>lombok</artifactId>
             <version>${lombok-version}</version>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
@@ -139,11 +130,6 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
@@ -279,7 +265,7 @@
             <plugin>
                 <groupId>com.github.kongchen</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
-                <version>3.1.5</version>
+                <version>3.1.0</version>
                 <configuration>
                     <apiSources>
                         <apiSource>
@@ -291,7 +277,7 @@
                                 <title>Application manager swagger</title>
                                 <version>0.0.1</version>
                                 <contact>
-                                    <email>mahmoud.romih@bics.com</email>
+                                    <email>mahmoud.romeh@test.com</email>
                                     <name>Mahmoud Romih</name>
                                 </contact>
                                 <license>
@@ -317,6 +303,7 @@
 
         </plugins>
     </build>
+
 
 
 </project>

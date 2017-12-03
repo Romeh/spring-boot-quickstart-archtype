@@ -4,11 +4,11 @@
     xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-catalog/1.0.0 http://maven.apache.org/xsd/archetype-catalog-1.0.0.xsd">
     <archetypes>
         <archetype>
-            <groupId>com.bics.spring-boot-archetypes</groupId>
-            <artifactId>spring-boot-batch-quickstart</artifactId>
+            <groupId>com.romeh.spring-boot-archetypes</groupId>
+            <artifactId>spring-boot-quickstart</artifactId>
             <version>1.0.0</version>
             <repository></repository>
-            <description>Archetype for creating BICS Spring Boot Batch application</description>
+            <description>Archetype for creating Spring Boot application</description>
         </archetype>
     </archetypes>
 </archetype-catalog>

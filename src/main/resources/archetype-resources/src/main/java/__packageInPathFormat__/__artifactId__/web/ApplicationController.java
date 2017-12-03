@@ -12,6 +12,8 @@ import ${package}.${artifactId}.web.dto.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
+import ${package}.${artifactId}.service.ApplicationService;
+import ${package}.${artifactId}.domain.ApplicationItem;
 /**
  * Created by id961900 on 08/08/2017.
  */
@@ -24,6 +26,30 @@ public class ApplicationController {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private ApplicationService applicationService;
+
+
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    @ApiOperation(value = "view the list of ALL current active created stored appllication items", response = ApplicationEntry.class)
+    public List<ApplicationEntry> getAllAlerts() {
+        log.debug("Trying to retrieve all alerts");
+        return applicationService.getApplicationItems().stream()
+                .map(applicationItem -> modelMapper.map(applicationItem, ApplicationEntry.class)).collect(Collectors.toList());
+
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation(value = "Create an application entry into the application manager")
+    public void createAlert(@Valid @RequestBody ApplicationEntry request) {
+        log.debug("Trying to create an alert: {}", request.toString());
+        applicationService.createApplicationItem(modelMapper.map(request, ApplicationItem.class));
+    }
 
     @RequestMapping(method={RequestMethod.GET},value={"/version"})
     public String getVersion() {

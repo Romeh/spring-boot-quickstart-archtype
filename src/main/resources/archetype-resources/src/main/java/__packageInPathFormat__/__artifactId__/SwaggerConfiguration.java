@@ -33,12 +33,12 @@ public class SwaggerConfiguration {
 
     private ApiInfo apiInfo() {
         ApiInfo apiInfo = new ApiInfo(
-                "Application Batch REST API",
-                "Application Batch REST API documentation.",
+                "Application REST API",
+                "Application manager REST API documentation.",
                 "API 1.0",
-                "Terms of service based into BICS terms of use",
-                new Contact("BICS", null, "test@bics.com"),
-                "License of API for BICS use only", null, Collections.emptyList());
+                "Terms of service based into company terms of use",
+                new Contact("yourCompany", null, "test@test.com"),
+                "License of API for YourCompany use only", null, Collections.emptyList());
         return apiInfo;
     }
 }

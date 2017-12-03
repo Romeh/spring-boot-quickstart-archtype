@@ -3,7 +3,7 @@ pipeline {
     agent { label 'jdk8' }
     // global env variables
     environment {
-        EMAIL_RECIPIENTS = 'mahmoud.romih@bics.com'
+        EMAIL_RECIPIENTS = 'mahmoud.romih@test.com'
     }
     stages {
 
@@ -58,7 +58,7 @@ pipeline {
                 script {
                     def mvnHome = tool 'Maven 3.3.9'
                     withSonarQubeEnv {
-                        // sh "'${mvnHome}/bin/mvn'  verify sonar:sonar -Dsonar.host.url=http://bicsjava.bc/sonar/ -Dmaven.test.failure.ignore=true"
+                        // sh "'${mvnHome}/bin/mvn'  verify sonar:sonar -Dsonar.host.url=http://sonarserverURl.bc/sonar/ -Dmaven.test.failure.ignore=true"
                         sh "'${mvnHome}/bin/mvn'  verify sonar:sonar -Dintegration-tests.skip=true -Dmaven.test.failure.ignore=true"
                     }
                 }
@@ -167,7 +167,8 @@ pipeline {
                         timeout(time: 3, unit: 'MINUTES') {
                             //  build job: 'AlertManagerToITT'
                             if (releasedVersion != null && !releasedVersion.isEmpty()) {
-                                def jarName = "alert-manager-${releasedVersion}.jar"
+                                // make the applciation name for the jar configurable
+                                def jarName = "application-${releasedVersion}.jar"
                                 echo "the application is deploying ${jarName}"
                                 // NOTE : DO NOT FORGET to create your UAT deployment jar , check Job AlertManagerToUAT in Jenkins for reference
                                 // the deployemnt should be based into Nexus repo
@@ -175,6 +176,29 @@ pipeline {
                                 echo 'the application is deployed !'
                             } else {
                                 error 'the application is not  deployed as released version is null!'
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+        stage('UAT E2E tests') {
+            when {
+                // check if branch is master
+                branch 'master'
+            }
+            steps {
+                // give some time till the deployment is done, so we wait 45 seconds
+                sleep(45)
+                script {
+                    if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
+                        timeout(time: 1, unit: 'MINUTES') {
+
+                            script {
+                                def mvnHome = tool 'Maven 3.3.9'
+                                // NOTE : if you change the test class name change it here as well
+                                sh "'${mvnHome}/bin/mvn' -Dtest=ApplicationE2E surefire:test"
                             }
 
                         }

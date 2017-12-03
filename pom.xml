@@ -2,13 +2,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.bics.spring-boot-archetypes</groupId>
-    <artifactId>spring-boot-batch-quickstart</artifactId>
+    <groupId>com.romeh.spring-boot-archetypes</groupId>
+    <artifactId>spring-boot-quickstart</artifactId>
     <version>1.0.0</version>
     <packaging>maven-archetype</packaging>
 
-    <name>BICS Spring Boot batch Maven Archetype: Quickstart</name>
-    <description>Archetype for creating BICS Spring Boot batch application</description>
+    <name>Spring Boot Maven Archetype: Quickstart</name>
+    <description>Archetype for creating Spring Boot application</description>
 
     <!-- Properties -->
     <properties>
@@ -17,17 +17,6 @@
         <maven.maven-archetype-plugin.version>3.0.1</maven.maven-archetype-plugin.version>
         <maven.maven-resources-plugin.version>3.0.2</maven.maven-resources-plugin.version>
     </properties>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>http://bicsjava.bc/nexus/repository/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>nexus-releases</id>
-            <url>http://bicsjava.bc/nexus/repository/releases</url>
-        </repository>
-    </distributionManagement>
 
     <!-- Build -->
     <build>

@@ -1,18 +1,14 @@
 package ${package}.${artifactId};
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.system.ApplicationPidFileWriter;
 import org.springframework.retry.annotation.EnableRetry;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableAutoConfiguration
-@Configuration
+@EnableScheduling
 @EnableRetry
-@EnableCaching
 public class Application {
 
     public static void main(String[] args) {
