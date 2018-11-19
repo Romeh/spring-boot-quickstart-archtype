@@ -38,7 +38,7 @@ public class ApplicationSanityCheck_ITT {
     @Test
     @Retry(times = 3, timeout = 20000)
     public void test_is_server_up() {
-        assertTrue(template.getForEntity(base + "/health", String.class).getStatusCode().is2xxSuccessful());
+        assertTrue(template.getForEntity(base + "/actuator/health", String.class).getStatusCode().is2xxSuccessful());
 
     }
 

@@ -33,7 +33,7 @@ public class ApplicationE2E{
     // example of true end to end call which call UAT real endpoint
     @Test
     public void test_is_server_up() {
-        assertTrue(restTemplate.getForEntity(baseURL + "/health", String.class).getStatusCode().is2xxSuccessful());
+        assertTrue(restTemplate.getForEntity(baseURL + "/actuator/health", String.class).getStatusCode().is2xxSuccessful());
 
     }
 
