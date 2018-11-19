@@ -5,14 +5,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.6.RELEASE</version>
-        <relativePath/><!-- lookup parent from repository -->
-    </parent>
-
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
@@ -31,7 +23,8 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <unit-tests.skip>false</unit-tests.skip>
         <integration-tests.skip>false</integration-tests.skip>
-        <spring-cloud.version>Dalston.SR2</spring-cloud.version>
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+        <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
         <project.artifact.name>${project.artifactId}</project.artifact.name>
         <build.number>LOCAL</build.number>
         <unit-tests.skip>false</unit-tests.skip>
@@ -47,14 +40,14 @@
         <jacoco.dataFile>${project.basedir}/../target/jacoco.exec</jacoco.dataFile>
         <jacoco.reporting.outputDirectory>${project.basedir}/../target/reports/jacoco</jacoco.reporting.outputDirectory>
         <jacoco.inclNoLocationClasses>true</jacoco.inclNoLocationClasses>
-        <spring-aop.version>4.3.10.RELEASE</spring-aop.version>
-        <spring.retry.version>1.2.1.RELEASE</spring.retry.version>
+        <spring-aop.version>5.1.2.RELEASE</spring-aop.version>
+        <spring.retry.version>1.2.2.RELEASE</spring.retry.version>
         <mockito-core.version>2.8.47</mockito-core.version>
         <swagger.version>2.7.0</swagger.version>
         <logback.version>1.2.3</logback.version>
         <cucumber-version>1.2.5</cucumber-version>
-        <modelmapper-version>1.1.0</modelmapper-version>
-        <lombok-version>1.16.18</lombok-version>
+        <modelmapper-version>2.3.1</modelmapper-version>
+        <lombok-version>1.18.4</lombok-version>
         <!-- add the rest controller list for swaggaer -->
         <rest-locations>${groupId}.${artifactId}.web</rest-locations>
 
@@ -62,6 +55,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -90,6 +90,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <!-- fix cpnfict between spring cloud config server and spring boot JPA-->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.zaxxer</groupId>
+                    <artifactId>HikariCP</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
