@@ -1,4 +1,4 @@
- Spring Boot Quickstart Maven Archetype
+ Spring Boot 2 Quickstart Maven Archetype
 =========================================
 ![Build Status](https://travis-ci.org/Romeh/spring-boot-quickstart-archtype.svg?branch=master)
 
